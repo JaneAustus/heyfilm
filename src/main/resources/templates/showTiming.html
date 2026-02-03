@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Timings</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS file if needed -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .movie-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .movie-item {
+            background-color: #e6e6e6;
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .movie-item img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .movie-item h3 {
+            text-align: center;
+            font-size: 20px;
+            color: #333;
+        }
+        .showtimes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        .showtime {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .showtime:hover {
+            background-color: #45a049;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Show Timings</h1>
+    <p>Find the perfect time to watch your favorite movies!</p>
+</header>
+
+<div class="container">
+    <h2>Available Movies</h2>
+    <div class="movie-list">
+        <!-- Movie 1 -->
+        <div class="movie-item">
+            <img src="legent.jpg" alt="Movie 1">
+            <h3>Legent</h3>
+            <p>Genre: Action, Comedy</p>
+            <p>Duration: 2h 30min</p>
+            <div class="showtimes">
+                <button class="showtime">11:00 AM</button>
+                <button class="showtime">02:30 PM</button>
+                <button class="showtime">06:00 PM</button>
+                <button class="showtime">09:30 PM</button>
+            </div>
+        </div>
+
+        <!-- Movie 2 -->
+        <div class="movie-item">
+            <img src="merasal.jpg" alt="Movie 2">
+            <h3>Mersal</h3>
+            <p>Genre:Action, Family</p>
+            <p>Duration: 2h 15min</p>
+            <div class="showtimes">
+                <button class="showtime">12:00 PM</button>
+                <button class="showtime">03:30 PM</button>
+                <button class="showtime">07:00 PM</button>
+                <button class="showtime">10:00 PM</button>
+            </div>
+        </div>
+
+        <!-- Movie 3 -->
+        <div class="movie-item">
+            <img src="naaisekar.jpg" alt="Movie 3">
+            <h3>Naaisekar</h3>
+            <p>Genre: Comedy </p>
+            <p>Duration: 1h 45min</p>
+            <div class="showtimes">
+                <button class="showtime">01:00 PM</button>
+                <button class="showtime">04:00 PM</button>
+                <button class="showtime">06:30 PM</button>
+                <button class="showtime">09:00 PM</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2025 MovieTheater. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

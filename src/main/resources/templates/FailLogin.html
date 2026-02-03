@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Failed - Movie Ticket Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .error-message {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 40px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .error-message h2 {
+            font-size: 24px;
+            color: #f44336;
+        }
+        .error-message p {
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .error-message a {
+            font-size: 18px;
+            color: #ff5722;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 30px;
+        }
+        .error-message a:hover {
+            color: #e64a19;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Movie Ticket Booking</h1>
+</header>
+
+<div class="error-message">
+    <h2>Login Failed</h2>
+    <p>Oops! The username or password you entered is incorrect.</p>
+    <p>Please check your credentials and try again.</p>
+    <p>If you forgot your password, you can reset it <a href="/ForgotPass">here</a>.</p>
+    
+	<form action="login" method="GET">
+	Try Again<input type="submit" value="Login">
+	</form>
+    <!-- Link to login page -->
+</div>
+
+</body>
+</html>

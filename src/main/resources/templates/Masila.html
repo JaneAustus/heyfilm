@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Seat Selection</title>
+    <style>
+        /* Basic Reset */
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            width: 80%; /* Adjust the width as per your preference */
+            max-width: 600px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .seat-map {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .row-label {
+            text-align: right;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .seat-selection {
+            display: grid;
+            grid-template-columns: repeat(10, 30px);
+            grid-gap: 10px;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .seat {
+            width: 30px;
+            height: 30px;
+            background-color: #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            line-height: 30px;
+        }
+
+        .seat.selected {
+            background-color: #6c6;
+        }
+
+        .seat.taken {
+            background-color: #999;
+            cursor: not-allowed;
+        }
+
+        #selected-seats {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #selected-seats li {
+            padding: 5px 0;
+        }
+    </style>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJ+K+WkdxwJ5H+Xs6O8AT5hbrD6o6XcD0bR+W6brgSvrz4z5txgZIbFf6z9V" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Movie Seat Selection</h2>
+
+        <!-- Form for Seat Selection -->
+        <form action="selection_Seats" method="get">
+            <!-- Row A -->
+           <div class="seat-map">
+    <div class="seat-selection">
+        <div class="seat  " data-seat="A1" name="seat-A1" >A1</div>
+        <div class="seat" data-seat="A2" name="seat-A2">A2</div>
+        <div class="seat" data-seat="A3" name="seat-A3">A3</div>
+        <div class="seat" data-seat="A4" name="seat-A4">A4</div>
+        <div class="seat taken" data-seat="A5" name="seat-A5">A5</div> <!-- Taken seat -->
+        <div class="seat" data-seat="A6" name="seat-A6">A6</div>
+        <div class="seat" data-seat="A7" name="seat-A7">A7</div>
+        <div class="seat" data-seat="A8" name="seat-A8">A8</div>
+        <div class="seat" data-seat="A9" name="seat-A9">A9</div>
+        <div class="seat" data-seat="A10" name="seat-A10">A10</div>
+    </div>
+</div>
+
+<!-- Row B -->
+<div class="seat-map">
+    <div class="seat-selection">
+        <div class="seat" data-seat="B1" name="seat-B1">B1</div>
+        <div class="seat" data-seat="B2" name="seat-B2">B2</div>
+        <div class="seat" data-seat="B3" name="seat-B3">B3</div>
+        <div class="seat" data-seat="B4" name="seat-B4">B4</div>
+        <div class="seat" data-seat="B5" name="seat-B5">B5</div>
+        <div class="seat" data-seat="B6" name="seat-B6">B6</div>
+        <div class="seat" data-seat="B7" name="seat-B7">B7</div>
+        <div class="seat" data-seat="B8" name="seat-B8">B8</div>
+        <div class="seat" data-seat="B9" name="seat-B9">B9</div>
+        <div class="seat" data-seat="B10" name="seat-B10">B10</div>
+    </div>
+</div>
+
+<!-- Row C -->
+<div class="seat-map">
+    <div class="seat-selection">
+        <div class="seat" data-seat="C1" name="seat-C1">C1</div>
+        <div class="seat" data-seat="C2" name="seat-C2">C2</div>
+        <div class="seat" data-seat="C3" name="seat-C3">C3</div>
+        <div class="seat" data-seat="C4" name="seat-C4">C4</div>
+        <div class="seat" data-seat="C5" name="seat-C5">C5</div>
+        <div class="seat" data-seat="C6" name="seat-C6">C6</div>
+        <div class="seat" data-seat="C7" name="seat-C7">C7</div>
+        <div class="seat" data-seat="C8" name="seat-C8">C8</div>
+        <div class="seat" data-seat="C9" name="seat-C9">C9</div>
+        <div class="seat" data-seat="C10" name="seat-C10">C10</div>
+    </div>
+</div>
+
+<!-- Row D -->
+<div class="seat-map">
+    <div class="seat-selection">
+        <div class="seat" data-seat="D1" name="seat-D1">D1</div>
+        <div class="seat" data-seat="D2" name="seat-D2">D2</div>
+        <div class="seat" data-seat="D3" name="seat-D3">D3</div>
+        <div class="seat" data-seat="D4" name="seat-D4">D4</div>
+        <div class="seat" data-seat="D5" name="seat-D5">D5</div>
+        <div class="seat" data-seat="D6" name="seat-D6">D6</div>
+        <div class="seat" data-seat="D7" name="seat-D7">D7</div>
+        <div class="seat" data-seat="D8" name="seat-D8">D8</div>
+        <div class="seat" data-seat="D9" name="seat-D9">D9</div>
+        <div class="seat" data-seat="D10" name="seat-D10">D10</div>
+    </div>
+</div>
+
+<!-- Row E -->
+<div class="seat-map">
+    <div class="seat-selection">
+        <div class="seat" data-seat="E1" name="seat-E1">E1</div>
+        <div class="seat" data-seat="E2" name="seat-E2">E2</div>
+        <div class="seat" data-seat="E3" name="seat-E3">E3</div>
+        <div class="seat" data-seat="E4" name="seat-E4">E4</div>
+        <div class="seat" data-seat="E5" name="seat-E5">E5</div>
+        <div class="seat" data-seat="E6" name="seat-E6">E6</div>
+        <div class="seat" data-seat="E7" name="seat-E7">E7</div>
+        <div class="seat" data-seat="E8" name="seat-E8">E8</div>
+        <div class="seat" data-seat="E9" name="seat-E9">E9</div>
+        <div class="seat" data-seat="E10" name="seat-E10">E10</div>
+    </div>
+</div>
+
+            <!-- Submit Button -->
+           <input type="submit" value="Book Seats">
+        </form>
+
+        <!-- Selected Seats Display -->
+        <h3>Selected Seats:</h3>
+        <ul id="selected-seats"></ul>
+    </div>
+
+    <script>
+        // Script for selecting and deselecting seats
+        const seats = document.querySelectorAll('.seat');
+        const selectedSeatsList = document.getElementById('selected-seats');
+        const seatForm = document.getElementById('seat-selection-form');
+
+        seats.forEach(seat => {
+            seat.addEventListener('click', function () {
+                if (!seat.classList.contains('taken')) {
+                    seat.classList.toggle('selected');
+                    updateSelectedSeats();
+                }
+            });
+        });
+
+        function updateSelectedSeats() {
+            const selectedSeats = document.querySelectorAll('.seat.selected');
+            selectedSeatsList.innerHTML = ''; // Clear the list
+            selectedSeats.forEach(seat => {
+                const seatNumber = seat.getAttribute('data-seat');
+                const listItem = document.createElement('li');
+                listItem.textContent = seatNumber;
+                selectedSeatsList.appendChild(listItem);
+            });
+        }
+
+        // Form submit behavior
+        seatForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent actual form submission
+            alert("Form submitted with selected seats!");
+            // You can implement form data processing here
+        });
+       
+    </script>
+
+</body>
+</html>
