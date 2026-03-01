@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
             padding: 0;
             background-color: #f9f9f9;
         }
+
         header {
             background-color: #333;
             color: white;
@@ -19,14 +21,17 @@
             justify-content: space-between;
             align-items: center;
         }
+
         header .logo {
             font-size: 24px;
         }
+
         header nav a {
             color: white;
             margin: 0 15px;
             text-decoration: none;
         }
+
         .booking-form {
             max-width: 800px;
             margin: 40px auto;
@@ -35,25 +40,31 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
         }
+
         .booking-form h2 {
             text-align: center;
             margin-bottom: 20px;
         }
+
         .form-group {
             margin-bottom: 20px;
         }
+
         .form-group label {
             display: block;
             font-size: 16px;
             margin-bottom: 5px;
         }
-        .form-group input, .form-group select {
+
+        .form-group input,
+        .form-group select {
             width: 100%;
             padding: 10px;
             font-size: 16px;
             border: 1px solid #ddd;
             border-radius: 5px;
         }
+
         .form-group button {
             width: 100%;
             padding: 15px;
@@ -64,75 +75,29 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
         .form-group button:hover {
             background-color: #e64a19;
         }
-    </style>
-    
-</head>
-<body>
 
-<header>
-    <div class="logo">MovieBooking</div>
-    <nav>
-        <a href="#">Home</a>
-        <a href="#">Movies</a>
-        <a href="#">Showtimes</a>
-        <a href="#">Bookings</a>
-        <a href="#">Contact Us</a>
-    </nav>
-</header>
+        <link rel="stylesheet" href="/css/responsive.css"></head><body><header style="background-color: #2c3e50; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #7f8c8d;"><div class="logo">MovieBooking</div><div class="hamburger" id="hamburger"><span></span><span></span><span></span></div><nav id="nav-links"><a href="/home">Home</a><a href="/movies">Movies</a><a href="/showTime">Showtimes</a><a href="/Bookings">Bookings</a><a href="/contectUs">Contact Us</a></nav></header><div class="booking-form"><h2>Book Your Tickets</h2><form action="BookingDTLS" method="GET"><div class="form-group"><label for="movie">Select Movie:</label><select id="movie" name="movie"><option value="MERSAL">MERSAL</option><option value="NAISEKER">NAISEKER</option><option value="LEGENT">LEGENT</option></select></div><div class="form-group"><label for="showtime">Select Showtime:</label><select id="showtime" name="showtime"><option value="10am">10:00 AM</option><option value="1pm">1:00 PM</option><option value="4pm">4:00 PM</option><option value="7pm">7:00 PM</option></select></div>< !-- New Date Picker --><div class="form-group"><label for="show-date">Select Show Date:</label><input type="date" id="showDate" name="showDate" required /></div><div class="form-group"><label for="name">Your Name:</label><input type="text" id="name" name="name" required></div><div class="form-group"><label for="email">Your Email:</label><input type="email" id="email" name="email" required></div><div class="form-group"><label for="phone">Phone Number:</label><input type="tel" id="phone" name="phone" required></div><div class="form-group"><button type="submit">Book Tickets</button></div></form></div><script>const hamburger=document.getElementById('hamburger');
+        const navLinks=document.getElementById('nav-links');
 
-<div class="booking-form">
-    <h2>Book Your Tickets</h2>
-    <form action="BookingDTLS" method="GET">
-        <div class="form-group">
-            <label for="movie">Select Movie:</label>
-            <select id="movie" name="movie">
-                <option value="MERSAL">MERSAL</option>
-                <option value="NAISEKER">NAISEKER</option>
-                <option value="LEGENT">LEGENT</option>
-            </select>
-        </div>
+        hamburger.addEventListener('click', ()=> {
+                navLinks.classList.toggle('active');
+                hamburger.classList.toggle('open');
+                const spans=hamburger.querySelectorAll('span');
 
-        <div class="form-group">
-            <label for="showtime">Select Showtime:</label>
-            <select id="showtime" name="showtime">
-                <option value="10am">10:00 AM</option>
-                <option value="1pm">1:00 PM</option>
-                <option value="4pm">4:00 PM</option>
-                <option value="7pm">7:00 PM</option>
-            </select>
-        </div>
+                if (hamburger.classList.contains('open')) {
+                    spans[0].style.transform='rotate(45deg) translate(5px, 5px)';
+                    spans[1].style.opacity='0';
+                    spans[2].style.transform='rotate(-45deg) translate(7px, -7px)';
+                }
 
-        <!-- New Date Picker -->
-        <div class="form-group">
-            <label for="show-date">Select Show Date:</label>
-            <input type="date" id="showDate" name="showDate" required />
-        </div>
-
-        <div class="form-group">
-            <label for="name">Your Name:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-
-        <div class="form-group">
-            <label for="email">Your Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-
-        <div class="form-group">
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" required>
-        </div>
-
-        <div class="form-group">
-            <button type="submit">Book Tickets</button>
-        </div>
-    </form>
-</div>
-
-
-
-</body>
-</html>
+                else {
+                    spans[0].style.transform='none';
+                    spans[1].style.opacity='1';
+                    spans[2].style.transform='none';
+                }
+            });
+        </script></body></html>

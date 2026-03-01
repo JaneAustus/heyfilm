@@ -24,12 +24,64 @@ import jakarta.transaction.Transactional;
 @Controller
 public class app_Controller {
 
+    // Simple Movie class for search
+    public static class Movie {
+        private String title;
+        private String image;
+        private double rating;
+        private String genre;
+
+        public Movie(String title, String image, double rating, String genre) {
+            this.title = title;
+            this.image = image;
+            this.rating = rating;
+            this.genre = genre;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getImage() {
+            return image;
+        }
+
+        public double getRating() {
+            return rating;
+        }
+
+        public String getGenre() {
+            return genre;
+        }
+    }
+
+    private List<Movie> availableMovies = Arrays.asList(
+            new Movie("MERSAL", "merasal.jpg", 5.0, "Action, Drama"),
+            new Movie("LEGENT", "legent.jpg", 3.0, "Horror, Mystery"),
+            new Movie("NAAISEKER", "naaisekar.jpg", 4.0, "Comedy, Drama"));
+
+    @GetMapping("/search")
+    public String searchMovies(@RequestParam String query, Model model) {
+        List<Movie> results = availableMovies.stream()
+                .filter(m -> m.getTitle().toLowerCase().contains(query.toLowerCase()) ||
+                        m.getGenre().toLowerCase().contains(query.toLowerCase()))
+                .collect(Collectors.toList());
+        model.addAttribute("results", results);
+        model.addAttribute("query", query);
+        return "searchResults";
+    }
+
+    @GetMapping("/")
+    public String index() {
+        return "redirect:/login";
+    }
+
     @Autowired
     private UserInterFace userService;
 
     @Autowired
     private BookingProducer bookingproducer;
-    
+
     @Autowired
     private seatBookingRepo seatService;
 
@@ -115,11 +167,11 @@ public class app_Controller {
         return "booking";
     }
 
-    
     @GetMapping("/ForgotPass")
     public String ForgotPass() {
-    	return "ForgotPassword";
+        return "ForgotPassword";
     }
+
     // ================== Movie Details ==================
     @GetMapping("/movie-details")
     public String movieInfo(@RequestParam String movie) {
@@ -194,14 +246,14 @@ public class app_Controller {
         booking.setRupees(totalPrice);
 
         seatService.save(booking);
-        
+
         BookingMessage msg = new BookingMessage();
         msg.setEmail(bookingUserEmail);
         msg.setMovieName(movieName);
         msg.setSeatNo(seat.split(",").length);
-      
+
         bookingproducer.sendBookingMessage(msg);
-        
+
         model.addAttribute("movieName", movieName);
         model.addAttribute("seats", seat);
         model.addAttribute("time", time);

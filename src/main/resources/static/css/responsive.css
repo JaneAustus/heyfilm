@@ -1,0 +1,121 @@
+/* Global Responsive Styles */
+
+/* Hamburger Menu Base Styles */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    z-index: 1001;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* Header Adjustments */
+header {
+    position: relative;
+}
+
+/* Mobile View Styles */
+@media screen and (max-width: 768px) {
+    header {
+        padding: 15px 20px !important;
+        flex-wrap: wrap !important;
+        justify-content: space-between !important;
+    }
+
+    .hamburger {
+        display: flex !important;
+    }
+
+    header nav {
+        display: none !important;
+        width: 100% !important;
+        flex-direction: column !important;
+        background-color: #2c3e50 !important;
+        position: absolute !important;
+        top: 60px !important;
+        left: 0 !important;
+        z-index: 1000 !important;
+        padding: 20px 0 !important;
+        border-bottom: 2px solid #7f8c8d !important;
+    }
+
+    header nav.active {
+        display: flex !important;
+    }
+
+    header nav a {
+        margin: 10px 40px !important;
+        display: block !important;
+        font-size: 18px !important;
+    }
+
+    .search-bar {
+        width: 100% !important;
+        margin-top: 10px !important;
+        margin-left: 0 !important;
+    }
+
+    .search-bar input {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+
+    /* Hero Banner */
+    .hero-banner h1 {
+        font-size: 32px !important;
+    }
+
+    /* Movie Listings */
+    .movie-listings {
+        padding: 20px !important;
+        gap: 10px !important;
+    }
+
+    .movie-card {
+        width: 100% !important;
+        max-width: 280px !important;
+        margin: 10px auto !important;
+    }
+
+    /* Seat Selection Responsive */
+    .seat {
+        width: 35px !important;
+        height: 35px !important;
+        font-size: 12px !important;
+        margin: 2px !important;
+    }
+    
+    .screen {
+        width: 95% !important;
+        font-size: 16px !important;
+    }
+
+    .container {
+        padding: 10px !important;
+        margin-top: 20px !important;
+    }
+
+    /* Form Responsive */
+    .booking-form, .login-form, .registration-form {
+        margin: 20px 15px !important;
+        padding: 15px !important;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hero-banner h1 {
+        font-size: 24px !important;
+    }
+    
+    .logo {
+        font-size: 20px !important;
+    }
+}
