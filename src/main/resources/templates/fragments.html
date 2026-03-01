@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="header_head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <style>
+        /* Shared Styles for the Header */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #7f8c8d;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ecf0f1;
+            text-decoration: none;
+        }
+
+        header nav a {
+            color: #bdc3c7;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        header nav a:hover {
+            color: white;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar input {
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+        }
+
+        #hamburger {
+            display: none;
+        }
+
+        /* Handled in responsive.css */
+    </style>
+</head>
+
+<body>
+
+    <header th:fragment="navbar">
+        <a href="/home" class="logo">MovieBooking</a>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="nav-links">
+            <a href="/home">Home</a>
+            <a href="/movies">Movies</a>
+            <a href="/showTime">Showtimes</a>
+            <a href="/Bookings">Bookings</a>
+            <a href="/contectUs">Contact Us</a>
+        </nav>
+        <div class="search-bar">
+            <form action="/search" method="GET" style="display: flex;">
+                <input type="text" name="query" placeholder="Search..." required>
+                <button type="submit"
+                    style="background: none; border: none; color: white; cursor: pointer; font-size: 18px; padding-left: 10px;">🔍</button>
+            </form>
+        </div>
+
+        <script th:fragment="nav_script">
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('nav-links');
+
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                hamburger.classList.toggle('open');
+                const spans = hamburger.querySelectorAll('span');
+                if (hamburger.classList.contains('open')) {
+                    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    spans[1].style.opacity = '0';
+                    spans[2].style.transform = 'rotate(-45deg) translate(7px, -7px)';
+                } else {
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
+                }
+            });
+        </script>
+    </header>
+
+    <footer th:fragment="footer"
+        style="background-color: #2c3e50; color: white; text-align: center; padding: 20px; margin-top: 50px;">
+        <p>&copy; 2026 MovieBooking App. All rights reserved.</p>
+        <p>Follow us on: <a href="#" style="color: #3498db;">Twitter</a> | <a href="#"
+                style="color: #3498db;">Instagram</a></p>
+    </footer>
+
+</body>
+
+</html>
