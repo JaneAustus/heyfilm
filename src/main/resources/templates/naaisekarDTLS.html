@@ -1,14 +1,145 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <div th:replace="~{fragments :: header_head}"></div>
+    <title>Naaisekar - HeyFilm</title>
+    <style>
+        .page-container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 40px;
+        }
+
+        .movie-details-card {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 50px;
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            padding: 20px;
+        }
+
+        .movie-poster-large {
+            width: 100%;
+            height: 550px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .movie-info-header {
+            margin-bottom: 30px;
+        }
+
+        .movie-info-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .movie-meta-tags {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .meta-tag {
+            padding: 6px 18px;
+            background: #f1f5f9;
+            color: var(--primary);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .details-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 40px;
+        }
+
+        .details-list li {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        .details-list strong {
+            color: var(--text-muted);
+            width: 150px;
+            display: inline-block;
+        }
+
+        .action-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .movie-details-card {
+                grid-template-columns: 1fr;
+            }
+
+            .movie-poster-large {
+                height: 400px;
+            }
+
+            .movie-info-header h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
 </head>
-<body>
-<h1>Movie name :naaiseker</h1>
-<h1>Actorse : Vadivelu,SJ </h1>
-<h1>relese date : 1000/01/01</h1>
-<h1>Director :Masilamani</h1>
+
+<body class="bg-light">
+
+    <div th:replace="~{fragments :: navbar}"></div>
+
+    <div class="container">
+        <div class="page-container">
+            <div class="movie-details-card">
+                <div class="poster-container">
+                    <img src="naaisekar.jpg" alt="Naaisekar" class="movie-poster-large"
+                        onerror="this.src='https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&w=500&q=80'">
+                </div>
+                <div class="info-container">
+                    <div class="movie-info-header">
+                        <div class="movie-meta-tags">
+                            <span class="meta-tag">Comedy, Family</span>
+                            <span class="meta-tag">U</span>
+                            <span class="meta-tag">4.0 ★</span>
+                        </div>
+                        <h1>Naaisekar</h1>
+                    </div>
+
+                    <ul class="details-list">
+                        <li><strong>Cast:</strong> Vadivelu, SJ</li>
+                        <li><strong>Release Date:</strong> 09/12/2022</li>
+                        <li><strong>Director:</strong> Masilamani</li>
+                        <li><strong>Duration:</strong> 2h 15m</li>
+                    </ul>
+
+                    <p class="text-muted" style="line-height: 1.8; margin-bottom: 40px;">
+                        A hilarious family entertainer about a man who swaps his soul with a dog. Follow the
+                        light-hearted and amusing adventures that will keep you laughing from start to finish.
+                    </p>
+
+                    <div class="action-group">
+                        <a href="/BookNow" class="button" style="padding: 15px 40px; font-weight: 700;">Book Tickets
+                            Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments :: footer}"></div>
+    <div th:replace="~{fragments :: nav_script}"></div>
 
 </body>
+
 </html>

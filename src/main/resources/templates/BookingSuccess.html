@@ -1,100 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Success - Movie Ticket Booking</title>
+    <div th:replace="~{fragments :: header_head}"></div>
+    <title>Booking Confirmed!</title>
     <style>
-        /* Global Styling */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-
-        header {
-            background-color: #333;
-            color: white;
-            padding: 20px;
+        .success-card {
+            max-width: 600px;
+            margin: 80px auto;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
         }
 
-        h1 {
-            font-size: 36px;
-        }
-
-        .success-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 60vh;
-            flex-direction: column;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .success-container h2 {
-            font-size: 30px;
-            color: #27ae60;
-            margin-bottom: 20px;
-        }
-
-        .success-container p {
-            font-size: 20px;
+        .success-icon {
+            font-size: 80px;
+            color: #2ecc71;
             margin-bottom: 30px;
+            animation: bounceIn 0.8s ease;
         }
 
-        .success-container .button {
-            padding: 12px 24px;
-            background-color: #2ecc71;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+
+            70% {
+                transform: scale(0.9);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
-        .success-container .button:hover {
-            background-color: #27ae60;
+        .details-list {
+            background: #f8fafc;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: left;
+            display: inline-block;
+            min-width: 300px;
         }
 
-        footer {
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            font-size: 14px;
+        .details-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .details-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
         }
     </style>
 </head>
-<body>
 
-<header>
-    <h1>Booking Success</h1>
-</header>
+<body class="bg-light">
 
-<div class="success-container">
-    <h2>Booking Confirmed!</h2>
-    <p>Thank you for booking your tickets. Your seats have been successfully reserved.</p>
-    <p>Details:</p>
-    <ul style="list-style-type: none; padding: 0;">
-        <li><strong>Movie:</strong><span th:text="${movieName}"></span></li>
-        <li><strong>Seats:</strong><span th:text="${seats}"> th:text="${seats}"></span></li>
-        <li><strong>Showtime:</strong><span th:text="${time}"></span></li>
-        <li><strong>Total Price:</strong><span th:text="${price}"></span></li>
-    </ul>
-   <a href="/home">
-   <input type="submit" value="submit" class="button">
-  </a>
-</div>
+    <div th:replace="~{fragments :: navbar}"></div>
 
-<footer>
-    <p>&copy; 2025 MovieBooking. All Rights Reserved.</p>
-</footer>
+    <div class="container">
+        <div class="success-card">
+            <div class="success-icon">✅</div>
+            <h1 style="color: var(--primary); font-weight: 800; margin-bottom: 10px;">Booking Confirmed!</h1>
+            <p style="color: var(--text-muted);">Thank you for choosing HeyFilm. Your tickets are ready!</p>
+
+            <div class="details-list">
+                <div class="details-item">
+                    <span>Movie</span>
+                    <strong th:text="${movieName}">Mersal</strong>
+                </div>
+                <div class="details-item">
+                    <span>Seats</span>
+                    <strong th:text="${seats}">A1, A2</strong>
+                </div>
+                <div class="details-item">
+                    <span>Showtime</span>
+                    <strong th:text="${time}">10:30 PM</strong>
+                </div>
+                <div class="details-item">
+                    <span>Total Paid</span>
+                    <strong th:text="${'₹' + price}">₹300</strong>
+                </div>
+            </div>
+
+            <a href="/home" class="button"
+                style="display: inline-block; text-decoration: none; padding: 15px 40px;">Return to Home</a>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments :: footer}"></div>
+    <div th:replace="~{fragments :: nav_script}"></div>
 
 </body>
+
 </html>

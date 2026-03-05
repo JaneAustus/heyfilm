@@ -1,46 +1,134 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Booking History</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <div th:replace="~{fragments :: header_head}"></div>
+    <title>Booking History - HeyFilm Premium</title>
+    <style>
+        .page-header {
+            padding: 60px 0;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .booking-table-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 60px;
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .table thead th {
+            border-top: none;
+            background: #f8fafc;
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            padding: 20px;
+        }
+
+        .table tbody td {
+            padding: 20px;
+            vertical-align: middle;
+            color: var(--text-dark);
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .movie-name-cell {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+    </style>
 </head>
+
 <body class="bg-light">
 
-    <div class="container mt-5">
-        <div class="shadow-lg p-4 bg-white rounded">
-            <h2 class="text-center mb-4 text-primary">Booking History</h2>
+    <div th:replace="~{fragments :: navbar}"></div>
 
-            <table class="table table-bordered table-hover">
-                <thead class="bg-primary text-white">
-                    <tr>
-                        <th>ID</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Movie Name</th>
-                        <th>Seats</th>
-                        <th>Mobile</th>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="booking, iterStat : ${AllBooking}" 
-                        th:class="${iterStat.odd} ? 'table-light' : 'table-secondary'">
-                        <td th:text="${booking.id}"></td>
-                        <td th:text="${booking.date}"></td>
-                        <td th:text="${booking.time}"></td>
-                        <td th:text="${booking.movie_Name}"></td>
-                        <td th:text="${booking.seatts}"></td>
-                        <td th:text="${booking.mobile}"></td>
-                        <td th:text="${booking.name}"></td>
-                    </tr>
-                </tbody>
-            </table>
+    <section class="page-header">
+        <div class="container">
+            <h1 style="font-weight: 800; margin-bottom: 0;">Your Booking History</h1>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="booking-table-container">
+            <div th:if="${not #lists.isEmpty(AllBooking)}" class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Movie</th>
+                            <th>Date & Time</th>
+                            <th>Seats</th>
+                            <th>Cost</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="booking : ${AllBooking}">
+                            <td class="movie-name-cell" th:text="${booking.movie_Name}">Mersal</td>
+                            <td>
+                                <div style="font-weight: 600;" th:text="${booking.date}">2023-10-25</div>
+                                <div class="text-muted small" th:text="${booking.time}">10:30 PM</div>
+                            </td>
+                            <td>
+                                <span class="text-accent" style="font-weight: 600;" th:text="${booking.seatts}">A1,
+                                    A2</span>
+                            </td>
+                            <td>
+                                <span style="font-weight: 700;" th:text="${'₹' + booking.rupees}">₹300</span>
+                            </td>
+                            <td>
+                                <span class="status-badge">Confirmed</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Empty State -->
+            <div th:if="${#lists.isEmpty(AllBooking)}" class="empty-state">
+                <div class="empty-icon">🎟️</div>
+                <h3 class="fw-bold">No Bookings Yet</h3>
+                <p class="text-muted mb-4">You haven't booked any movies yet. Ready for your first cinematic journey?
+                </p>
+                <a href="/movies" class="button">Browse Movies</a>
+            </div>
         </div>
     </div>
 
-    <!-- Bootstrap JS (Optional) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <div th:replace="~{fragments :: footer}"></div>
+    <div th:replace="~{fragments :: nav_script}"></div>
 
 </body>
+
 </html>

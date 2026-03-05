@@ -1,21 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>Terms And Conditions</title>
- <style>
-        .center-text {
-            text-align: center;
+    <div th:replace="~{fragments :: header_head}"></div>
+    <title>FAQ - HeyFilm</title>
+    <style>
+        .legal-content {
+            max-width: 800px;
+            margin: 60px auto;
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .legal-content h1 {
+            color: var(--primary);
+            font-weight: 800;
+            margin-bottom: 2rem;
+        }
+
+        .faq-item {
+            margin-bottom: 2rem;
+        }
+
+        .faq-question {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .faq-answer {
+            color: var(--text-muted);
+            line-height: 1.6;
         }
     </style>
 </head>
-<body>
 
- <div class="center-text">
-      <script type="text/javascript">
-      document.write("This Website is no FAQ bicouse ,It is notmal website.\n if you have any FAQ ,you can easyly dwonload and configure my website ");
-      </script>
+<body class="bg-light">
+    <div th:replace="~{fragments :: navbar}"></div>
+    <div class="container">
+        <div class="legal-content">
+            <h1>Frequently Asked Questions</h1>
+            <div class="faq-item">
+                <span class="faq-question">How do I book a ticket?</span>
+                <p class="faq-answer">Simply browse our movies, select a showtime, choose your seats, and confirm your
+                    booking. It's that easy!</p>
+            </div>
+            <div class="faq-item">
+                <span class="faq-question">Can I cancel my booking?</span>
+                <p class="faq-answer">Currently, we do not support online cancellations. Please contact our support team
+                    for assistance.</p>
+            </div>
+            <div class="faq-item">
+                <span class="faq-question">Is my payment secure?</span>
+                <p class="faq-answer">We use industry-standard encryption to ensure your payment details are always safe
+                    and secure.</p>
+            </div>
+        </div>
     </div>
-
+    <div th:replace="~{fragments :: footer}"></div>
+    <div th:replace="~{fragments :: nav_script}"></div>
 </body>
+
 </html>

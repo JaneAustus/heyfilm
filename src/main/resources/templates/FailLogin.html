@@ -1,69 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Failed - Movie Ticket Booking</title>
+    <div th:replace="~{fragments :: header_head}"></div>
+    <title>Login Failed - HeyFilm</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        .error-message {
+        .feedback-container {
             max-width: 500px;
-            margin: 50px auto;
-            padding: 40px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 100px auto;
             text-align: center;
-        }
-        .error-message h2 {
-            font-size: 24px;
-            color: #f44336;
-        }
-        .error-message p {
-            font-size: 16px;
-            margin-top: 20px;
-        }
-        .error-message a {
-            font-size: 18px;
-            color: #ff5722;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 30px;
-        }
-        .error-message a:hover {
-            color: #e64a19;
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
         }
     </style>
 </head>
-<body>
 
-<header>
-    <h1>Movie Ticket Booking</h1>
-</header>
-
-<div class="error-message">
-    <h2>Login Failed</h2>
-    <p>Oops! The username or password you entered is incorrect.</p>
-    <p>Please check your credentials and try again.</p>
-    <p>If you forgot your password, you can reset it <a href="/ForgotPass">here</a>.</p>
-    
-	<form action="login" method="GET">
-	Try Again<input type="submit" value="Login">
-	</form>
-    <!-- Link to login page -->
-</div>
-
+<body class="bg-light">
+    <div th:replace="~{fragments :: navbar}"></div>
+    <div class="container">
+        <div class="feedback-container">
+            <div style="font-size: 4rem; color: #e74c3c; margin-bottom: 20px;">⚠️</div>
+            <h1 style="color: var(--primary); font-weight: 800; margin-bottom: 15px;">Login Failed</h1>
+            <p style="color: var(--text-muted); margin-bottom: 30px;">The username or password you entered is incorrect.
+                Please check your credentials and try again.</p>
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <a th:href="@{/login}" class="button">Try Again</a>
+                <a th:href="@{/ForgotPass}"
+                    style="color: var(--accent); text-decoration: none; font-weight: 600;">Forgot Password?</a>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments :: footer}"></div>
+    <div th:replace="~{fragments :: nav_script}"></div>
 </body>
+
 </html>

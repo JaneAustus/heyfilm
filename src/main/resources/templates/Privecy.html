@@ -1,21 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>Terms And Conditions</title>
- <style>
-        .center-text {
-            text-align: center;
+    <div th:replace="~{fragments :: header_head}"></div>
+    <title>Privacy Policy - HeyFilm</title>
+    <style>
+        .legal-content {
+            max-width: 800px;
+            margin: 60px auto;
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .legal-content h1 {
+            color: var(--primary);
+            font-weight: 800;
+            margin-bottom: 2rem;
+        }
+
+        .legal-section {
+            margin-bottom: 2rem;
+        }
+
+        .legal-section h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .legal-text {
+            color: var(--text-muted);
+            line-height: 1.6;
         }
     </style>
 </head>
-<body>
 
- <div class="center-text">
-      <script type="text/javascript">
-      document.write("This Website is no cuntains privecy policy bicouse this is model ticket Booking Website .Created by @Masilamani .\n if you have any privecy ,you can easyly dwonload and configure my website ");
-      </script>
+<body class="bg-light">
+    <div th:replace="~{fragments :: navbar}"></div>
+    <div class="container">
+        <div class="legal-content">
+            <h1>Privacy Policy</h1>
+            <div class="legal-section">
+                <h2>1. Information Collection</h2>
+                <p class="legal-text">We collect information you provide directly to us, such as when you create an
+                    account, book a ticket, or contact us for support.</p>
+            </div>
+            <div class="legal-section">
+                <h2>2. How We Use Information</h2>
+                <p class="legal-text">We use the information we collect to provide, maintain, and improve our services,
+                    and to process your ticket bookings.</p>
+            </div>
+            <div class="legal-section">
+                <h2>3. Data Security</h2>
+                <p class="legal-text">We take reasonable measures to help protect information about you from loss,
+                    theft, misuse, and unauthorized access.</p>
+            </div>
+        </div>
     </div>
-
+    <div th:replace="~{fragments :: footer}"></div>
+    <div th:replace="~{fragments :: nav_script}"></div>
 </body>
+
 </html>

@@ -1,140 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show Timings</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS file if needed -->
+    <div th:replace="~{fragments :: header_head}"></div>
+    <title>Show Timings - HeyFilm</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #333;
+        .page-header {
+            text-align: center;
+            padding: 60px 0 40px;
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
             color: white;
-            text-align: center;
-            padding: 20px;
+            margin-bottom: 40px;
         }
-        .container {
-            max-width: 1000px;
-            margin: 30px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-        .movie-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-        .movie-item {
-            background-color: #e6e6e6;
-            border-radius: 8px;
-            padding: 20px;
-            width: 300px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .movie-item img {
-            width: 100%;
-            border-radius: 8px;
-        }
-        .movie-item h3 {
-            text-align: center;
-            font-size: 20px;
-            color: #333;
-        }
-        .showtimes {
+
+        .showtime-slots {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            justify-content: center;
-            margin-top: 15px;
         }
-        .showtime {
-            background-color: #4CAF50;
+
+        .slot {
+            padding: 8px 16px;
+            background: #f1f5f9;
+            color: var(--primary);
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .slot:hover {
+            background: var(--accent);
             color: white;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .showtime:hover {
-            background-color: #45a049;
-        }
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 14px;
-            color: #666;
+            transform: scale(1.05);
         }
     </style>
 </head>
-<body>
 
-<header>
-    <h1>Show Timings</h1>
-    <p>Find the perfect time to watch your favorite movies!</p>
-</header>
+<body class="bg-light">
 
-<div class="container">
-    <h2>Available Movies</h2>
-    <div class="movie-list">
-        <!-- Movie 1 -->
-        <div class="movie-item">
-            <img src="legent.jpg" alt="Movie 1">
-            <h3>Legent</h3>
-            <p>Genre: Action, Comedy</p>
-            <p>Duration: 2h 30min</p>
-            <div class="showtimes">
-                <button class="showtime">11:00 AM</button>
-                <button class="showtime">02:30 PM</button>
-                <button class="showtime">06:00 PM</button>
-                <button class="showtime">09:30 PM</button>
-            </div>
+    <div th:replace="~{fragments :: navbar}"></div>
+
+    <section class="page-header">
+        <div class="container">
+            <h1 style="font-size: 3rem; font-weight: 800; margin-bottom: 10px;">Show Timings</h1>
+            <p style="font-size: 1.1rem; opacity: 0.9;">Book your favorite spot for the cinematic journey.</p>
         </div>
+    </section>
 
-        <!-- Movie 2 -->
-        <div class="movie-item">
-            <img src="merasal.jpg" alt="Movie 2">
-            <h3>Mersal</h3>
-            <p>Genre:Action, Family</p>
-            <p>Duration: 2h 15min</p>
-            <div class="showtimes">
-                <button class="showtime">12:00 PM</button>
-                <button class="showtime">03:30 PM</button>
-                <button class="showtime">07:00 PM</button>
-                <button class="showtime">10:00 PM</button>
+    <div class="container mb-5">
+        <div class="movie-grid">
+            <!-- Movie 1 -->
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="legent.jpg" alt="Legent"
+                        onerror="this.src='https://images.unsplash.com/photo-1542204172-8921ec447dcb?auto=format&fit=crop&w=500&q=80'">
+                </div>
+                <div class="movie-info">
+                    <h3>Legent</h3>
+                    <div class="movie-genre">
+                        <span>🎭 Action, Comedy</span> |
+                        <span>⏱️ 2h 30min</span>
+                    </div>
+                    <div class="showtime-slots mt-3">
+                        <a href="/BookNow" class="slot">11:00 AM</a>
+                        <a href="/BookNow" class="slot">02:30 PM</a>
+                        <a href="/BookNow" class="slot">06:00 PM</a>
+                        <a href="/BookNow" class="slot">09:30 PM</a>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- Movie 3 -->
-        <div class="movie-item">
-            <img src="naaisekar.jpg" alt="Movie 3">
-            <h3>Naaisekar</h3>
-            <p>Genre: Comedy </p>
-            <p>Duration: 1h 45min</p>
-            <div class="showtimes">
-                <button class="showtime">01:00 PM</button>
-                <button class="showtime">04:00 PM</button>
-                <button class="showtime">06:30 PM</button>
-                <button class="showtime">09:00 PM</button>
+            <!-- Movie 2 -->
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="merasal.jpg" alt="Mersal"
+                        onerror="this.src='https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=500&q=80'">
+                </div>
+                <div class="movie-info">
+                    <h3>Mersal</h3>
+                    <div class="movie-genre">
+                        <span>🎭 Action, Family</span> |
+                        <span>⏱️ 2h 15min</span>
+                    </div>
+                    <div class="showtime-slots mt-3">
+                        <a href="/BookNow" class="slot">12:00 PM</a>
+                        <a href="/BookNow" class="slot">03:30 PM</a>
+                        <a href="/BookNow" class="slot">07:00 PM</a>
+                        <a href="/BookNow" class="slot">10:00 PM</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Movie 3 -->
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="naaisekar.jpg" alt="Naaisekar"
+                        onerror="this.src='https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&w=500&q=80'">
+                </div>
+                <div class="movie-info">
+                    <h3>Naaisekar</h3>
+                    <div class="movie-genre">
+                        <span>🎭 Comedy</span> |
+                        <span>⏱️ 1h 45min</span>
+                    </div>
+                    <div class="showtime-slots mt-3">
+                        <a href="/BookNow" class="slot">01:00 PM</a>
+                        <a href="/BookNow" class="slot">04:00 PM</a>
+                        <a href="/BookNow" class="slot">06:30 PM</a>
+                        <a href="/BookNow" class="slot">09:00 PM</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<footer>
-    <p>&copy; 2025 MovieTheater. All rights reserved.</p>
-</footer>
+    <div th:replace="~{fragments :: footer}"></div>
+    <div th:replace="~{fragments :: nav_script}"></div>
 
 </body>
+
 </html>

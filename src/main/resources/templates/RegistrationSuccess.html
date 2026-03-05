@@ -1,65 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Success - Movie Ticket Booking</title>
+    <div th:replace="~{fragments :: header_head}"></div>
+    <title>Registration Successful - HeyFilm</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        .success-message {
+        .feedback-container {
             max-width: 500px;
-            margin: 50px auto;
-            padding: 40px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 100px auto;
             text-align: center;
-        }
-        .success-message h2 {
-            font-size: 24px;
-            color: #4CAF50;
-        }
-        .success-message p {
-            font-size: 16px;
-            margin-top: 20px;
-        }
-        .success-message a {
-            font-size: 18px;
-            color: #ff5722;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 30px;
-        }
-        .success-message a:hover {
-            color: #e64a19;
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
         }
     </style>
 </head>
-<body>
 
-<header>
-    <h1>Movie Ticket Booking</h1>
-</header>
-
-<div class="success-message">
-    <h2>Registration Successful!</h2>
-    <p>Thank you for registering with us. Your account has been created successfully.</p>
-    <p>Now you can proceed to book your movie tickets!</p>
-
-    <a href="login.html">Go to Login</a> <!-- Link to login page or any other page -->
-</div>
-
+<body class="bg-light">
+    <div th:replace="~{fragments :: navbar}"></div>
+    <div class="container">
+        <div class="feedback-container">
+            <div style="font-size: 4rem; color: #2ecc71; margin-bottom: 20px;">🎉</div>
+            <h1 style="color: var(--primary); font-weight: 800; margin-bottom: 15px;">Registration Successful!</h1>
+            <p style="color: var(--text-muted); margin-bottom: 30px;">Welcome to HeyFilm! Your account has been
+                created successfully. You can now log in and start booking your favorite movies.</p>
+            <a th:href="@{/login}" class="button">Go to Login</a>
+        </div>
+    </div>
+    <div th:replace="~{fragments :: footer}"></div>
+    <div th:replace="~{fragments :: nav_script}"></div>
 </body>
+
 </html>

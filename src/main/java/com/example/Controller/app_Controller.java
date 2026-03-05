@@ -19,8 +19,6 @@ import com.example.model.User;
 import com.example.repo.UserInterFace;
 import com.example.repo.seatBookingRepo;
 
-import jakarta.transaction.Transactional;
-
 @Controller
 public class app_Controller {
 
@@ -229,7 +227,6 @@ public class app_Controller {
 
     // ================== Confirm Seat Booking ==================
     @PostMapping("/Masila")
-    @Transactional
     public String selectedSeats(@RequestParam String seat, Model model) {
 
         int pricePerSeat = 150;

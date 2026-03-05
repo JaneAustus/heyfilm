@@ -24,7 +24,7 @@ public class SeatBookingController {
         details.setName("Masila");
         details.setDate("22-02-2001");
         details.setEmail("Masila@Gmail.com");
-        details.setId(4);
+        details.setId("4");
         details.setRupees(50000);
         details.setTime("10:30");
 
@@ -34,5 +34,3 @@ public class SeatBookingController {
         return "Booking saved successfully!";
     }
 }
-
-

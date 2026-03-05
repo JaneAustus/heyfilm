@@ -9,4 +9,4 @@ VOLUME /tmp
 COPY target/Movie_TicketBooking_Final-0.0.1-SNAPSHOT.jar app.jar
 
 # Run the jar, listening on the PORT provided by the environment
-ENTRYPOINT ["java", "-Dserver.port=${PORT}", "-jar", "/app.jar"]
+ENTRYPOINT java -Dserver.port=${PORT:-8080} -jar /app.jar

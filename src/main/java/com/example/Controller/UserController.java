@@ -14,7 +14,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserInterFace service;  // Repository for User
+    private UserInterFace service; // Repository for User
 
     // Register a new user
     @PostMapping("/register")
@@ -31,7 +31,7 @@ public class UserController {
 
     // Find user by ID
     @GetMapping("/{id}")
-    public ResponseEntity<User> findUserById(@PathVariable int id) {
+    public ResponseEntity<User> findUserById(@PathVariable String id) {
         return service.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -39,7 +39,7 @@ public class UserController {
 
     // Update user
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User updatedUser) {
+    public ResponseEntity<User> updateUser(@PathVariable String id, @RequestBody User updatedUser) {
         return service.findById(id)
                 .map(user -> {
                     user.setName(updatedUser.getName());
@@ -55,7 +55,7 @@ public class UserController {
 
     // Delete user
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable int id) {
+    public ResponseEntity<Void> deleteUser(@PathVariable String id) {
         return service.findById(id)
                 .map(user -> {
                     service.delete(user);

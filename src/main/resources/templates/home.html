@@ -1,238 +1,219 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Ticket Booking</title>
+    <div th:replace="~{fragments :: header_head}"></div>
+    <title>Home - HeyFilm Premium</title>
     <style>
-        body {
-            font-family: 'Times New Roman', serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fafafa;
+        .hero {
+            position: relative;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: #0f172a;
         }
 
-        header {
-            background-color: #2c3e50;
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.4)), url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
             color: white;
-            padding: 20px 40px;
+            max-width: 650px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 35px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .section-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #7f8c8d;
+            align-items: flex-end;
+            margin-bottom: 40px;
         }
 
-        header .logo {
-            font-size: 30px;
-            font-weight: bold;
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 0;
         }
 
-        header nav a {
-            color: white;
-            margin: 0 15px;
+        .view-all {
+            color: var(--accent);
             text-decoration: none;
-            font-size: 18px;
-            font-weight: normal;
-        }
-
-        header .search-bar input {
-            padding: 6px;
-            margin-left: 20px;
-            border-radius: 5px;
-            border: 1px solid #bdc3c7;
-        }
-
-        .hero-banner {
-            background-image: url('your-image-url.jpg');
-            height: 400px;
-            background-size: cover;
+            font-weight: 700;
             display: flex;
-            justify-content: center;
             align-items: center;
-            color: blue;
-            text-align: center;
-            background-position: center;
+            gap: 8px;
+            transition: var(--transition);
         }
 
-        .hero-banner h1 {
-            font-size: 50px;
-            font-weight: bold;
-            letter-spacing: 2px;
+        .view-all:hover {
+            gap: 12px;
         }
 
-        .button {
-            padding: 12px 24px;
-            background-color: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-            text-transform: uppercase;
+        .features-section {
+            padding: 80px 0;
+            background: #f8fafc;
         }
 
-        .button:hover {
-            background-color: #c0392b;
-        }
-
-        .movie-listings {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
+        .feature-card {
+            background: white;
             padding: 40px;
-            background-color: #ecf0f1;
-        }
-
-        .movie-card {
-            width: 220px;
-            margin: 15px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .movie-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .movie-card img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
-
-        .movie-card .movie-info {
-            padding: 15px;
+            border-radius: 20px;
             text-align: center;
-            background-color: #f9f9f9;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
         }
 
-        .movie-card .movie-info h3 {
-            margin: 10px 0;
-            font-size: 20px;
-            color: #34495e;
+        .feature-card:hover {
+            transform: translateY(-5px);
         }
 
-        .movie-card .movie-info p {
-            font-size: 16px;
-            color: #7f8c8d;
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
         }
 
-        .footer {
-            background-color: #2c3e50;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            font-size: 16px;
-        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
 
-        .footer a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
+            .hero {
+                height: 500px;
+            }
         }
     </style>
-    <link rel="stylesheet" href="/css/responsive.css">
 </head>
 
-<body>
+<body class="bg-light">
 
-    <header>
-        <div class="logo">MovieBooking</div>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <nav id="nav-links">
-            <a href="/home">Home</a>
-            <a href="/movies">Movies</a>
-            <a href="/showTime">Showtimes</a>
-            <a href="/Bookings">Bookings</a>
-            <a href="/contectUs">Contact Us</a>
-        </nav>
-        <div class="search-bar">
-            <form action="/search" method="GET" style="display: flex;">
-                <input type="text" name="query" placeholder="Search..." required>
-                <button type="submit"
-                    style="background: none; border: none; color: white; cursor: pointer; font-size: 20px; padding: 0 10px;">🔍</button>
-            </form>
-        </div>
-    </header>
+    <div th:replace="~{fragments :: navbar}"></div>
 
-    <div class="hero-banner">
-        <div>
-            <h1>Now Showing</h1>
-            <a href="BookNow">
-                <button class="button">Book Now</button>
-            </a>
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container hero-content">
+            <span class="text-accent fw-bold mb-3 d-block" style="letter-spacing: 2px;">CINEMATIC EXPERIENCE</span>
+            <h1>Exclusive Access to the Big Screen</h1>
+            <p>Experience the latest blockbusters in state-of-the-art cinemas. Book your journey to another world today.
+            </p>
+            <div class="d-flex gap-3">
+                <a href="/movies" class="button" style="padding: 15px 40px;">Book Tickets</a>
+                <a href="/showTime" class="button button-outline"
+                    style="padding: 15px 40px; color: white; border-color: white;">View Showtimes</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container py-5 mt-5">
+        <div class="section-header">
+            <div>
+                <h2 style="font-weight: 800; color: var(--primary);">Trending Now</h2>
+                <p class="text-muted">Handpicked selection for movie lovers like you.</p>
+            </div>
+            <a href="/movies" class="view-all">View All Movies →</a>
+        </div>
+
+        <div class="movie-grid">
+            <!-- Movie 1 -->
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="merasal.jpg" alt="Mersal"
+                        onerror="this.src='https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=500&q=80'">
+                    <div class="movie-badge">5.0 ★</div>
+                </div>
+                <div class="movie-info">
+                    <h3>MERSAL</h3>
+                    <p class="movie-genre">Action | Drama | Thriller</p>
+                    <a href="/movie-details?movie=merasal" class="button">Details</a>
+                </div>
+            </div>
+
+            <!-- Movie 2 -->
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="legent.jpg" alt="The Legend"
+                        onerror="this.src='https://images.unsplash.com/photo-1542204172-8921ec447dcb?auto=format&fit=crop&w=500&q=80'">
+                    <div class="movie-badge">3.0 ★</div>
+                </div>
+                <div class="movie-info">
+                    <h3>THE LEGEND</h3>
+                    <p class="movie-genre">Sci-Fi | Action | Drama</p>
+                    <a href="/movie-details?movie=legent" class="button">Details</a>
+                </div>
+            </div>
+
+            <!-- Movie 3 -->
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="naaisekar.jpg" alt="Naaisekar"
+                        onerror="this.src='https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&w=500&q=80'">
+                    <div class="movie-badge">4.0 ★</div>
+                </div>
+                <div class="movie-info">
+                    <h3>NAAISEKER</h3>
+                    <p class="movie-genre">Comedy | Drama | Family</p>
+                    <a href="/movie-details?movie=naaisekar" class="button">Details</a>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="movie-listings">
-        <div class="movie-card">
-            <img src="merasal.jpg" alt="Movie 1">
-            <div class="movie-info">
-                <h3>MERSEL</h3>
-                <p>Rating: 5</p>
-
+    <section class="features-section">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <span class="feature-icon">🚀</span>
+                        <h4 class="fw-bold">Fast Booking</h4>
+                        <p class="text-muted">Pick your seat and pay in less than 30 seconds. Seamless and secure.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <span class="feature-icon">🍿</span>
+                        <h4 class="fw-bold">Premium Snack Bar</h4>
+                        <p class="text-muted">Pre-order your favorite snacks and skip the queue at the cinema.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <span class="feature-icon">🎭</span>
+                        <h4 class="fw-bold">Best Experience</h4>
+                        <p class="text-muted">IMAX, 4DX, and Dolby Atmos. The best technology for the best fans.</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="movie-card">
-            <img src="legent.jpg" alt="Movie 2">
-            <div class="movie-info">
-                <h3>LEGENT</h3>
-                <p>Rating: 3</p>
+    </section>
 
-            </div>
-        </div>
-        <div class="movie-card">
-            <img src="naaisekar.jpg" alt="Movie 3">
-            <div class="movie-info">
-                <h3>NAAISEKER</h3>
-                <p>Rating: 4</p>
-
-            </div>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <p>&copy; It is Created By Masila. All Rights Reserved.</p>
-        <p>
-            <a href="/terms">Terms and Conditions</a> |
-            <a href="/privecy">Privacy Policy</a> |
-            <a href="/FAQ">FAQ</a>
-        </p>
-    </footer>
-
-    <script>
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('nav-links');
-
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-
-            // Optional: Animate hamburger to X
-            const spans = hamburger.querySelectorAll('span');
-            hamburger.classList.toggle('open');
-            if (hamburger.classList.contains('open')) {
-                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(-45deg) translate(7px, -7px)';
-            } else {
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
-            }
-        });
-    </script>
+    <div th:replace="~{fragments :: footer}"></div>
+    <div th:replace="~{fragments :: nav_script}"></div>
 
 </body>
 
