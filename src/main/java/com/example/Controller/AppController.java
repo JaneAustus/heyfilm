@@ -13,16 +13,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.model.seat_booking_detailes;
+import com.example.model.SeatBookingDetails;
 import com.example.model.BookingMessage;
 import com.example.model.User;
-import com.example.repo.UserInterFace;
-import com.example.repo.seatBookingRepo;
+import com.example.repo.UserRepository;
+import com.example.repo.SeatBookingRepository;
 
 @Controller
-public class app_Controller {
+public class AppController {
 
-    // Simple Movie class for search
     public static class Movie {
         private String title;
         private String image;
@@ -75,15 +74,14 @@ public class app_Controller {
     }
 
     @Autowired
-    private UserInterFace userService;
+    private UserRepository userRepository;
 
     @Autowired
-    private BookingProducer bookingproducer;
+    private BookingProducer bookingProducer;
 
     @Autowired
-    private seatBookingRepo seatService;
+    private SeatBookingRepository seatBookingRepository;
 
-    // Temporary booking info (can be improved with session)
     private String movieName;
     private String time;
     private String date;
@@ -91,20 +89,18 @@ public class app_Controller {
     private String bookingUserEmail;
     private BigInteger bookingUserMobile;
 
-    // ================== Registration ==================
     @GetMapping("/Register")
     public String showRegisterForm(Model model) {
         model.addAttribute("user", new User());
-        return "registerform"; // Thymeleaf template
+        return "registerform";
     }
 
     @PostMapping("/Register")
     public String registerUser(@ModelAttribute User user) {
-        userService.save(user);
+        userRepository.save(user);
         return "login";
     }
 
-    // ================== Login ==================
     @GetMapping("/login")
     public String showLoginForm() {
         return "login";
@@ -112,8 +108,7 @@ public class app_Controller {
 
     @PostMapping("/login")
     public String loginUser(@RequestParam String username, @RequestParam String password) {
-
-        List<User> users = userService.findAll();
+        List<User> users = userRepository.findAll();
         for (User user : users) {
             if (username.equals(user.getUserName()) && password.equals(user.getPassword())) {
                 return "home";
@@ -122,10 +117,9 @@ public class app_Controller {
         return "FailLogin";
     }
 
-    // ================== Static Pages ==================
-    @GetMapping("/privecy")
+    @GetMapping("/privacy")
     public String privacyPolicy() {
-        return "Privecy";
+        return "privacy";
     }
 
     @GetMapping("/terms")
@@ -150,14 +144,14 @@ public class app_Controller {
 
     @GetMapping("/Bookings")
     public String bookingHistory(Model model) {
-        List<seat_booking_detailes> allBookings = seatService.findAll();
+        List<SeatBookingDetails> allBookings = seatBookingRepository.findAll();
         model.addAttribute("AllBooking", allBookings);
         return "BookingHistory";
     }
 
-    @GetMapping("/contectUs")
+    @GetMapping("/contactUs")
     public String contactUs() {
-        return "contectUs";
+        return "contactUs";
     }
 
     @GetMapping("/BookNow")
@@ -170,7 +164,6 @@ public class app_Controller {
         return "ForgotPassword";
     }
 
-    // ================== Movie Details ==================
     @GetMapping("/movie-details")
     public String movieInfo(@RequestParam String movie) {
         switch (movie.toLowerCase()) {
@@ -181,11 +174,10 @@ public class app_Controller {
             case "merasal":
                 return "merasalDTLS";
             default:
-                return "movies"; // fallback
+                return "movies";
         }
     }
 
-    // ================== Booking Seat Selection ==================
     @GetMapping("/BookingDTLS")
     public String bookingDetails(
             @RequestParam String movie,
@@ -203,17 +195,15 @@ public class app_Controller {
         bookingUserEmail = email;
         bookingUserMobile = new BigInteger(phone);
 
-        List<seat_booking_detailes> allBookings = seatService.findAll();
-        importent_Methods sa = new importent_Methods();
-        List<seat_booking_detailes> bookedSeats = sa.getSameBookings(movieName, date, time, allBookings);
+        List<SeatBookingDetails> allBookings = seatBookingRepository.findAll();
+        importent_Methods sa = new importent_Methods(); // Still using the utility for now, but fixed logic later
+        List<SeatBookingDetails> bookedSeats = sa.getSameBookings(movieName, date, time, allBookings);
 
         if (bookedSeats != null && !bookedSeats.isEmpty()) {
-            String[] arr = new String[50];
-            int a = 0;
-            for (seat_booking_detailes item : bookedSeats) {
-                arr[a++] = item.getSeatts();
-            }
-            String bookedSeatsStr = Arrays.stream(arr).filter(s -> s != null).collect(Collectors.joining(","));
+            String bookedSeatsStr = bookedSeats.stream()
+                    .map(SeatBookingDetails::getSeats)
+                    .filter(s -> s != null)
+                    .collect(Collectors.joining(","));
             List<String> bookedSeatList = Arrays.asList(bookedSeatsStr.split(","));
             model.addAttribute("UnAvailSeats", bookedSeatList);
         }
@@ -225,31 +215,29 @@ public class app_Controller {
         return "seatselection";
     }
 
-    // ================== Confirm Seat Booking ==================
-    @PostMapping("/Masila")
+    @PostMapping("/confirm-booking")
     public String selectedSeats(@RequestParam String seat, Model model) {
-
         int pricePerSeat = 150;
         int totalPrice = seat.split(",").length * pricePerSeat;
 
-        seat_booking_detailes booking = new seat_booking_detailes();
-        booking.setSeatts(seat);
+        SeatBookingDetails booking = new SeatBookingDetails();
+        booking.setSeats(seat);
         booking.setDate(date);
         booking.setEmail(bookingUserEmail);
         booking.setName(bookingUserName);
-        booking.setMovie_Name(movieName);
+        booking.setMovieName(movieName);
         booking.setTime(time);
         booking.setMobile(bookingUserMobile);
         booking.setRupees(totalPrice);
 
-        seatService.save(booking);
+        seatBookingRepository.save(booking);
 
         BookingMessage msg = new BookingMessage();
         msg.setEmail(bookingUserEmail);
         msg.setMovieName(movieName);
         msg.setSeatNo(seat.split(",").length);
 
-        bookingproducer.sendBookingMessage(msg);
+        bookingProducer.sendBookingMessage(msg);
 
         model.addAttribute("movieName", movieName);
         model.addAttribute("seats", seat);
@@ -259,10 +247,8 @@ public class app_Controller {
         return "BookingSuccess";
     }
 
-    // ================== Home ==================
     @GetMapping("/home")
     public String home() {
         return "home";
     }
-
 }

@@ -4,21 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import com.example.model.seat_booking_detailes;
+import com.example.model.SeatBookingDetails;
 
 @Service
 public class importent_Methods {
 
-    // Get seat_booking_detailes for same date, same time, same movie
-    public List<seat_booking_detailes> getSameBookings(
-            String movie, String date, String time, List<seat_booking_detailes> allBookings) {
+    public List<SeatBookingDetails> getSameBookings(
+            String movie, String date, String time, List<SeatBookingDetails> allBookings) {
 
-        List<seat_booking_detailes> filteredBookings = new ArrayList<>();
+        List<SeatBookingDetails> filteredBookings = new ArrayList<>();
 
-        for (seat_booking_detailes booking : allBookings) {
-
-            // Check for null before comparing
-            boolean movieMatch = booking.getMovie_Name() != null && booking.getMovie_Name().equalsIgnoreCase(movie);
+        for (SeatBookingDetails booking : allBookings) {
+            boolean movieMatch = booking.getMovieName() != null && booking.getMovieName().equalsIgnoreCase(movie);
             boolean dateMatch = booking.getDate() != null && booking.getDate().equalsIgnoreCase(date);
             boolean timeMatch = booking.getTime() != null && booking.getTime().equalsIgnoreCase(time);
 
@@ -26,13 +23,10 @@ public class importent_Methods {
                 filteredBookings.add(booking);
             }
         }
-
         return filteredBookings;
     }
 
     public importent_Methods() {
         super();
     }
-
 }
-

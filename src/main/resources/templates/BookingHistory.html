@@ -95,13 +95,13 @@
                     </thead>
                     <tbody>
                         <tr th:each="booking : ${AllBooking}">
-                            <td class="movie-name-cell" th:text="${booking.movie_Name}">Mersal</td>
+                            <td class="movie-name-cell" th:text="${booking.movieName}">Mersal</td>
                             <td>
                                 <div style="font-weight: 600;" th:text="${booking.date}">2023-10-25</div>
                                 <div class="text-muted small" th:text="${booking.time}">10:30 PM</div>
                             </td>
                             <td>
-                                <span class="text-accent" style="font-weight: 600;" th:text="${booking.seatts}">A1,
+                                <span class="text-accent" style="font-weight: 600;" th:text="${booking.seats}">A1,
                                     A2</span>
                             </td>
                             <td>
